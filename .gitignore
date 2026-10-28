@@ -1,0 +1,8 @@
+.DS_Store
+__pycache__/
+*.py[cod]
+*.log
+
+# Device-specific OEM framework backups and patched firmware artifacts.
+backups/
+/services-*-local.jar
