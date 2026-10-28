@@ -8,6 +8,7 @@
 
 - 實機為 Mindfish／Lamppa R9（使用者稱 Z9），Android 4.4.2／API 19、`armeabi-v7a`；原先安裝 KOReader 2021.01.1、E-Ink Launcher 0.1.8.3 與 SarkBook 3.4.214，SarkBook APK 後依使用者要求移除。
 - E-Ink Launcher 已成為開機後 HOME，跨一般重開機驗證成功。沒有刷入其他系統；後續依使用者需求已解除安裝指定 App、移除 SarkBook／SarkReader／Exchange 系統 APK，並將系統語系設為 `zh_TW`。SarkBook 等系統 APK 的本機復原副本不公開；完整套件狀態見[實機修改清單](Current-Changes.md)。
+- 第二台同版 R9 也完成 Launcher、套件清理與 `zh_TW` 設定；其原始 `services.jar` 雜湊與第一台一致。瀏覽器 Google 首頁偏好已寫入，但因 Wi-Fi 驗證失敗且系統時鐘停在 1970，尚未確認網頁能載入；細節見[第二台複製紀錄](Current-Changes.md)。
 - KOReader OpenCC 外掛已安裝，日誌確認載入；尚未用實際書籍執行轉換。
 - 原始與修補後的 OEM `services.jar` 只作本機備份，不會放進公開工具包。下一台可用專案 patcher 從自己的備份重建，但只接受本次已知原始檔 SHA-256；細節見 [Launcher 快速處理手冊](Launcher-Runbook.md)。
 

@@ -74,6 +74,16 @@ Exchange 移除前會反覆崩潰；logcat 顯示它查詢 `content://com.androi
 - 強制停止並重新開啟瀏覽器後，回到 Google 分頁；新分頁顯示 Google 搜尋頁，偏好設定也回讀到相同首頁。
 - 網址列搜尋引擎仍為百度。這台瀏覽器提供的選項是百度、Yahoo 奇摩與 Bing，沒有 Google。
 
+## 第二台 R9 複製結果（2026-10-28）
+
+- 目標讀值為 R9／`evk_6sl_r9`、Android 4.4.2／API 19、build `20171011`、`armeabi-v7a`。第二台原始 `services.jar` SHA-256 與第一台完全相同：`4cdbfb20a84956a93609f4740d8d114a13470085cc1fa92348517be619c13c7d`。
+- 第二台原始 JAR 另存為本機忽略檔 `backups/services-r9-second-original.jar`。此執行環境沒有 Java／smali，因此在確認第二台原始雜湊、既有修補檔 SHA-256 `d5d68ad8a62f2c0fe81f58aae196844b5ca113245ee27d89009229eaaaa24fc7`、ZIP 完整性及 DEX 035 後，重用了第一台已驗證的修補檔。修補檔先複製到第二台自己的 `/data/local/tmp/z9-recovery/`；系統檔回讀雜湊一致。
+- UiAutomator 回報 E-Ink Launcher 為 HOME，`dumpsys package` 顯示其 `mAlways=true`；重開後 `sys.boot_completed=1` 且 HOME 焦點為 E-Ink Launcher。Launcher patch 只適用於原始雜湊完全相同的韌體。
+- 六個替代閱讀 App 已停用；`com.UCMobile`、`com.shere.assistivetouch`、`com.flyersoft.moonreaderp` 已解除安裝。Comic888 在第二台原為 4.6.1；`pm uninstall com.Comic888` 曾回報 `Failure`，但其 `pm path`、`pm list packages -u`、`/data/app` APK 與 `/data/data` 目錄回讀皆不存在，因此確認已移除。下次遇到相同輸出應先查實際套件狀態，不要只依命令文字判定。
+- 第二台的 SarkBook 為 3.4.214、SarkReader 為 1.3.6.1.20170911，Exchange 為 4.4.2-20171011。三個系統 APK 移除前另備份至本機忽略目錄 `backups/device-2/removed-system-apks/`；移除後重開，APK 檔案及套件皆不在裝置上。Exchange 移除後的 logcat 沒有該套件的新崩潰紀錄。
+- `persist.sys.language=zh`、`persist.sys.country=TW`，重開後 ActivityManager 設定為 `zh_TW`；設定畫面已確認顯示繁體中文。
+- 第二台瀏覽器首頁偏好設定與 `search_engine` 值都回讀為 Google。新分頁網址是 `https://www.google.com/`，但頁面尚未成功載入：Wi-Fi 已開啟，儲存的網路在 WPA 四向交握時回報預先共用金鑰可能錯誤；系統時間仍是 1970-12-15，雖然 `auto_time=1`。連上可用網路並校正時間後，仍需重新驗證 Google 頁面；未將網路名稱或密碼寫入公開文件。
+
 ## 系統語言
 
 - 原始 locale 為 `zh_CN`；已將 Android 4.4 的 `persist.sys.language` 設為 `zh`、`persist.sys.country` 設為 `TW`，並重新開機。

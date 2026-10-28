@@ -9,11 +9,11 @@
 - Launcher：Modificator E-Ink Launcher，套件 `cn.modificator.launcher`，版本 0.1.8.3
 - 原廠桌面（原已安裝）：SarkBook，套件 `com.smart.arkbook`，版本 3.4.214
 - KOReader：2021.01.1
-- 初次更換 Launcher 時保留 SarkBook；之後依使用者要求，已將 `/system/app/SarkBook.apk` 從裝置移除。復原副本僅在本機 `backups/removed-system-apks/`，已由 `.gitignore` 排除。
+- 初次更換 Launcher 時保留 SarkBook；之後依使用者要求，已在兩台裝置移除 `/system/app/SarkBook.apk`。第一台復原副本在本機 `backups/removed-system-apks/`，第二台在 `backups/device-2/removed-system-apks/`，都由 `.gitignore` 排除。
 - UiAutomator 曾將 E-Ink Launcher 設為永久 HOME；單靠偏好設定無法阻止這台韌體原先的 framework 在開機時指定 SarkBook，因此另有 framework 修正。SarkBook APK 後續已依使用者要求移除。
-- 這台的原始 `/system/framework/services.jar` SHA-256：`4cdbfb20a84956a93609f4740d8d114a13470085cc1fa92348517be619c13c7d`。
+- 兩台原始 `/system/framework/services.jar` SHA-256 相同：`4cdbfb20a84956a93609f4740d8d114a13470085cc1fa92348517be619c13c7d`。第二台另有自己的原始檔本機備份；由於當時執行環境缺少 Java／smali，經比對原始及修補雜湊後重用第一台已驗證的輸出。
 
-以上是單台裝置讀值。下一台先讀取型號、Android 版本、HOME 候選與 framework 雜湊，不要只根據外觀或 USB 燈號判定。
+以上是兩台裝置讀值。下一台仍須重新讀取型號、Android 版本、HOME 候選與 framework 雜湊，不要只根據外觀或 USB 燈號判定。
 
 ## 設定永久 HOME
 

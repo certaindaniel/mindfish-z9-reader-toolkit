@@ -4,16 +4,16 @@ Tools and notes for adapting a Mindfish Z9 / Lamppa R9 e-reader for KOReader. Th
 
 ## Project status
 
-The changes below were made on one R9/Z9 running Android 4.4.2 (API 19), `armeabi-v7a`, KOReader 2021.01.1, and Modificator E-Ink Launcher 0.1.8.3. SarkBook 3.4.214 was the original launcher and has since been removed from this unit. Other units may have different firmware or permissions; inspect each device before applying system-level changes.
+The first setup was made on an R9/Z9 running Android 4.4.2 (API 19), `armeabi-v7a`, KOReader 2021.01.1, and Modificator E-Ink Launcher 0.1.8.3. A second unit with the same firmware build was then processed; its device-specific evidence and network-dependent verification are in [`docs/Current-Changes.md`](docs/Current-Changes.md). SarkBook 3.4.214 was the original launcher and has been removed from both units. Other units may have different firmware or permissions; inspect each device before applying system-level changes.
 
 | Area | What is included | Current evidence |
 |---|---|---|
 | KOReader OpenCC | Offline KOReader plugin for EPUB and UTF-8 TXT; OpenCC `s2twp` ARMv7 executable and dictionaries | Installed on the connected Z9; KOReader logged the plugin load. No book has been converted yet. |
-| Launcher selection | UiAutomator source and its small `z9-home-default.jar`; launcher runbook | The HOME preference tool was used on the Z9. The separate framework change that survives reboot is device-specific; its OEM JARs are excluded. |
+| Launcher selection | UiAutomator source and its small `z9-home-default.jar`; launcher runbook | E-Ink Launcher remained HOME after reboot on both units. Their original `services.jar` hashes matched; OEM JARs remain local and excluded. |
 | Mac conversion fallback | `z9-opencc.py` for Mac files or ADB paths | Source and usage notes are included; it leaves the original book intact. |
 | Firmware research | Launcher and firmware compatibility notes | No alternate OS was flashed. No R9-specific recovery image has been verified. |
-| App cleanup | Six alternate readers disabled; Comic888, UC Browser, EasyTouch, and Moon+ Reader Pro uninstalled; SarkBook, SarkReader, and Exchange system APKs removed | Package state and E-Ink Launcher focus were checked after reboot. System APK recovery copies remain local and ignored. |
-| Browser homepage | Built-in Android Browser | Opens Google; address-bar searches still use Baidu. |
+| App cleanup | Six alternate readers disabled; Comic888, UC Browser, EasyTouch, and Moon+ Reader Pro uninstalled; SarkBook, SarkReader, and Exchange system APKs removed | Package state was checked after reboot on both units. System APK recovery copies remain local and ignored. |
+| Browser homepage | Built-in Android Browser | Google homepage preference is set on both. The second unit could not load it while Wi-Fi authentication failed and its clock remained at 1970. |
 
 Six alternate reader apps remain disabled without clearing their data. Exact package names, removed system APKs, local recovery instructions, and the current app inventory are in [`docs/Current-Changes.md`](docs/Current-Changes.md).
 
