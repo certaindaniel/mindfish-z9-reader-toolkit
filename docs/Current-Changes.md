@@ -68,6 +68,12 @@ Exchange 移除前會反覆崩潰；logcat 顯示它查詢 `content://com.androi
 
 目前保留 KOReader、E-Ink Launcher、AOSP Browser、ES File Explorer、Onyx App Market、Shortcut Creator、時鐘與其他尚未指定移除的套件。下一台裝置應重新盤點，不要照搬本次套件清單。
 
+## 瀏覽器首頁
+
+- 內建 Android Browser（`com.android.browser`，版本 `4.4.2-20171011`）的首頁已設為 `https://www.google.com`。
+- 強制停止並重新開啟瀏覽器後，回到 Google 分頁；新分頁顯示 Google 搜尋頁，偏好設定也回讀到相同首頁。
+- 網址列搜尋引擎仍為百度。這台瀏覽器提供的選項是百度、Yahoo 奇摩與 Bing，沒有 Google。
+
 ## 系統語言
 
 - 原始 locale 為 `zh_CN`；已將 Android 4.4 的 `persist.sys.language` 設為 `zh`、`persist.sys.country` 設為 `TW`，並重新開機。
