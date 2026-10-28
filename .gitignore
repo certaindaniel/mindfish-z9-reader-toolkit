@@ -6,3 +6,6 @@ __pycache__/
 # Device-specific OEM framework backups and patched firmware artifacts.
 backups/
 /services-*-local.jar
+
+# Keep device and OEM APK binaries out of the public toolkit.
+*.apk

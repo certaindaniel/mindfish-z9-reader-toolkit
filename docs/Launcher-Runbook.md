@@ -7,10 +7,10 @@
 - Android：4.4.2／API 19，CPU ABI `armeabi-v7a`
 - 型號／裝置代號：`R9`／`evk_6sl_r9`
 - Launcher：Modificator E-Ink Launcher，套件 `cn.modificator.launcher`，版本 0.1.8.3
-- 原廠桌面：SarkBook，套件 `com.smart.arkbook`，版本 3.4.214
+- 原廠桌面（原已安裝）：SarkBook，套件 `com.smart.arkbook`，版本 3.4.214
 - KOReader：2021.01.1
-- 已保留 SarkBook 與其資料；沒有停用或解除安裝。
-- UiAutomator 已將 E-Ink Launcher 設為永久 HOME；這單獨設定無法阻止原廠 framework 在開機時重新指定 SarkBook。
+- 初次更換 Launcher 時保留 SarkBook；之後依使用者要求，已將 `/system/app/SarkBook.apk` 從裝置移除。復原副本僅在本機 `backups/removed-system-apks/`，已由 `.gitignore` 排除。
+- UiAutomator 曾將 E-Ink Launcher 設為永久 HOME；單靠偏好設定無法阻止這台韌體原先的 framework 在開機時指定 SarkBook，因此另有 framework 修正。SarkBook APK 後續已依使用者要求移除。
 - 這台的原始 `/system/framework/services.jar` SHA-256：`4cdbfb20a84956a93609f4740d8d114a13470085cc1fa92348517be619c13c7d`。
 
 以上是單台裝置讀值。下一台先讀取型號、Android 版本、HOME 候選與 framework 雜湊，不要只根據外觀或 USB 燈號判定。

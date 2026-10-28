@@ -6,8 +6,8 @@
 
 這份研究先完成公開資料查證，之後才接上實機。以下是後續讀回結果：
 
-- 實機為 Mindfish／Lamppa R9（使用者稱 Z9），Android 4.4.2／API 19、`armeabi-v7a`；安裝 KOReader 2021.01.1、E-Ink Launcher 0.1.8.3 與 SarkBook 3.4.214。
-- E-Ink Launcher 已成為開機後 HOME，跨一般重開機驗證成功。SarkBook 與其資料保留；沒有刷入其他系統或解除安裝 App，另有 6 個替代閱讀 App 僅停用，詳見[實機修改清單](Current-Changes.md)。
+- 實機為 Mindfish／Lamppa R9（使用者稱 Z9），Android 4.4.2／API 19、`armeabi-v7a`；原先安裝 KOReader 2021.01.1、E-Ink Launcher 0.1.8.3 與 SarkBook 3.4.214，SarkBook APK 後依使用者要求移除。
+- E-Ink Launcher 已成為開機後 HOME，跨一般重開機驗證成功。沒有刷入其他系統；後續依使用者需求已解除安裝指定 App、移除 SarkBook／SarkReader／Exchange 系統 APK，並將系統語系設為 `zh_TW`。SarkBook 等系統 APK 的本機復原副本不公開；完整套件狀態見[實機修改清單](Current-Changes.md)。
 - KOReader OpenCC 外掛已安裝，日誌確認載入；尚未用實際書籍執行轉換。
 - 原始與修補後的 OEM `services.jar` 只作本機備份，不會放進公開工具包。下一台可用專案 patcher 從自己的備份重建，但只接受本次已知原始檔 SHA-256；細節見 [Launcher 快速處理手冊](Launcher-Runbook.md)。
 
@@ -62,26 +62,26 @@ KOReader 的 F-Droid 條目列出 Android 4.3 以上需求，並提供 ARMv7、A
 ## 建議處理順序
 
 1. 確認連上的確是 Mindfish／Lamppa 閱讀器；讀取實機 Android 版本、API level、型號和現有 HOME app。
-2. 保留 SarkBook，不解除安裝或停用；先記錄目前預設值與回復方式。
+2. 在其他裝置上，先保留 SarkBook 作回復桌面，直到替代 Launcher 已跨重開機確認。這台後續依使用者要求移除了 SarkBook APK，復原副本只留在本機。
 3. 依實際 API level 選擇相容 Launcher。若走系統選擇器，選定後設定為「一律使用」，再測試按 Home 與重新開機後是否仍保留。
 4. 若同型機開機後又回 SarkBook，先比對該機 `services.jar` 的 SHA-256。只有與本次原版完全相同才可用專案 patcher 從該機自己的備份重建；雜湊不同就重新分析，不要直接覆寫。公開版不附 OEM JAR。
 5. 燈號仍以實機電池圖示／電量變化與原廠或賣家確認為準；目前沒有可引用的 Z9 燈號表。
 
-若要評估較完整的閱讀器工作流程，可另外試用 BookLauncher + KOReader；目前這台已將現有 E-Ink Launcher 設成開機預設並保留 SarkBook。任何替代 Launcher 都要先確認與該台 Android 版本及韌體相容，且不要把本次的 framework JAR 套用到不同雜湊的系統版本。
+若要評估較完整的閱讀器工作流程，可另外試用 BookLauncher + KOReader；目前這台以 E-Ink Launcher 為開機預設，並已依使用者要求移除 SarkBook APK（本機留有復原副本）。任何替代 Launcher 都要先確認與該台 Android 版本及韌體相容，且不要把本次的 framework JAR 套用到不同雜湊的系統版本。
 
 ## 實機接上與處理結果（2026-10-28）
 
 - USB 裝置顯示 Freescale R9（VID `18D1`、PID `4E42`）；ADB 與 Android 屬性都回報型號 R9、裝置代號 `evk_6sl_r9`，與使用者所說的 Z9／R9 閱讀器相符，不是先前辨識到的 Samsung 裝置。
 - 實機系統是 Android 4.4.2/API 19，CPU ABI 是 `armeabi-v7a`。
 - 電池服務回報 USB 供電中、電量 100%、狀態為已充滿。這能確認當下系統讀到 USB 供電和滿電狀態，仍不能定義綠燈閃爍的意思。
-- 已安裝 Modificator E-Ink Launcher 0.1.8.3、KOReader v2021.01.1 與 SarkBook 3.4.214，沒有必要先下載新 Launcher 或閱讀 App。
+- 初次盤點時已安裝 Modificator E-Ink Launcher 0.1.8.3、KOReader v2021.01.1 與 SarkBook 3.4.214，沒有必要先下載新 Launcher 或閱讀 App。
 - 原先 HOME 預設為 SarkBook。已透過應用資訊只清除 SarkBook 的預設 HOME 指派；沒有清除 App 資料、停用或移除 SarkBook。
 - Android 4.4 的選擇器經 ADB 點選 E-Ink 列時只會啟動一次，且 `Always` 按鈕仍是停用狀態。UiAutomator 的 Android `IPackageManager.addPreferredActivity` 可將 E-Ink 設為永久 HOME；讀回 `dumpsys package` 可見 `mAlways=true`，按 Home 的焦點 Activity 是 `cn.modificator.launcher/.Launcher`。
 - 初次更換預設後，重開機會把 HOME 改回 SarkBook。檢查 `services.jar` 的 DEX 後，確認是 `ActivityManagerService.setDefaultLauncher()` 硬編碼造成。
 - 已備份原始 framework JAR、重建並安裝指向 E-Ink 的 JAR。開機日誌確認 framework 指派 E-Ink，`dumpsys package` 顯示 `mAlways=true`，Home Activity 與畫面焦點都是 `cn.modificator.launcher/.Launcher`。
 - 替換後首次啟動會重新最佳化 framework 相依 App，畫面短暫顯示 Android「正在升級…」；約數分鐘完成，`sys.boot_completed=1`，Launcher 正常顯示。
 - 本次修改跨一般重開機生效；系統更新、恢復原廠或重刷系統可能還原原本的 SarkBook 指派。原始與修補 JAR、雜湊、套用條件及還原流程都已記錄在 [Z9 Launcher 快速處理手冊](Launcher-Runbook.md)。
-- 本次沒有刷入其他系統，也沒有清除 SarkBook 資料、停用或移除 SarkBook。
+- 設定 Launcher 時沒有清除 SarkBook 資料、停用或移除；後續依使用者要求從 `/system/app` 移除了 SarkBook APK，復原副本保留於本機忽略目錄。
 
 ## 來源
 

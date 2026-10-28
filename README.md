@@ -12,8 +12,9 @@ The changes below were made on one R9/Z9 running Android 4.4.2 (API 19), `armeab
 | Launcher selection | UiAutomator source and its small `z9-home-default.jar`; launcher runbook | The HOME preference tool was used on the Z9. The separate framework change that survives reboot is device-specific; its OEM JARs are excluded. |
 | Mac conversion fallback | `z9-opencc.py` for Mac files or ADB paths | Source and usage notes are included; it leaves the original book intact. |
 | Firmware research | Launcher and firmware compatibility notes | No alternate OS was flashed. No R9-specific recovery image has been verified. |
+| App cleanup | Six alternate readers disabled; Comic888, UC Browser, EasyTouch, and Moon+ Reader Pro uninstalled; SarkBook, SarkReader, and Exchange system APKs removed | Package state and E-Ink Launcher focus were checked after reboot. System APK recovery copies remain local and ignored. |
 
-SarkBook and its data were kept as a fallback. Six redundant reader apps were disabled without uninstalling them or clearing their data; the exact package list and restore command are in [`docs/Current-Changes.md`](docs/Current-Changes.md).
+Six alternate reader apps remain disabled without clearing their data. Exact package names, removed system APKs, local recovery instructions, and the current app inventory are in [`docs/Current-Changes.md`](docs/Current-Changes.md).
 
 ## Quick start
 
@@ -41,6 +42,10 @@ To transfer books from a computer, connect the reader and computer to the same l
 
 If automatic discovery fails, use **Calibre → Wireless settings → Server address → Manual** in KOReader and enter the address and port shown by Calibre. The reader's Wi-Fi was off when this toolkit was prepared; joining a network remains a per-device setup step.
 
+## System language
+
+The device locale is set to Traditional Chinese (`zh_TW`). After reboot, the Android Settings screen was verified with Traditional Chinese labels such as **設定** and **語言與輸入設定**. Some individual apps may still show Simplified Chinese when their own resources do not include a Taiwan translation.
+
 ## Package map
 
 - `opencc.koplugin/` — KOReader menu plugin, markup-aware EPUB conversion, native OpenCC executable, dictionaries, and license texts.
@@ -49,7 +54,7 @@ If automatic discovery fails, use **Calibre → Wireless settings → Server add
 - `patch-services-launcher.py` — rebuilds the device-specific Launcher framework change from an exact-hash original JAR.
 - `build-opencc-android.sh`, `install-opencc-koplugin.sh` — build and install helpers.
 - `docs/` — current modification inventory, launcher runbook, and research.
-- `backups/` — local-only device framework JARs; ignored and intentionally absent from a public checkout.
+- `backups/` — local-only OEM framework and removed system APK recovery copies; ignored and absent from a public checkout.
 
 ## Device-specific Launcher change
 
