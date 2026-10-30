@@ -1,6 +1,6 @@
 # 目前修改項目與驗證狀態
 
-整理日期：2026-10-28
+整理日期：2026-10-30
 
 ## Launcher
 
@@ -83,6 +83,12 @@ Exchange 移除前會反覆崩潰；logcat 顯示它查詢 `content://com.androi
 - 第二台的 SarkBook 為 3.4.214、SarkReader 為 1.3.6.1.20170911，Exchange 為 4.4.2-20171011。三個系統 APK 移除前另備份至本機忽略目錄 `backups/device-2/removed-system-apks/`；移除後重開，APK 檔案及套件皆不在裝置上。Exchange 移除後的 logcat 沒有該套件的新崩潰紀錄。
 - `persist.sys.language=zh`、`persist.sys.country=TW`，重開後 ActivityManager 設定為 `zh_TW`；設定畫面已確認顯示繁體中文。
 - 第二台瀏覽器首頁偏好設定與 `search_engine` 值都回讀為 Google。新分頁網址是 `https://www.google.com/`，但頁面尚未成功載入：Wi-Fi 已開啟，儲存的網路在 WPA 四向交握時回報預先共用金鑰可能錯誤；系統時間仍是 1970-12-15，雖然 `auto_time=1`。連上可用網路並校正時間後，仍需重新驗證 Google 頁面；未將網路名稱或密碼寫入公開文件。
+
+## KOReader 文字顯示調整（第二台，2026-10-30）
+
+- 目前閱讀書籍的字色仍顯灰，已在 KOReader 逐本設定中將字重從「標準」改為「粗體」，並把對比／Font Gamma 索引由 15 調至 25（滑桿第三格）。
+- 回讀該書 `.sdr/metadata.mobi.lua` 確認 `font_embolden=1`、`gamma_index=25`。
+- 這是書籍個別設定，沒有更改全域預設；其他書籍需各自設定。下一台可將此值作為起點，再依實機觀感微調。ADB 截圖不能完全代表電子紙面板的實際對比。
 
 ## 系統語言
 
