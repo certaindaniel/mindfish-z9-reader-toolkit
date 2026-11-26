@@ -6,6 +6,7 @@ FONTS_DIR="$ROOT_DIR/fonts"
 REMOTE_KOREADER_FONTS="/storage/emulated/0/koreader/fonts"
 REMOTE_SYSTEM_FONTS="/storage/emulated/0/Fonts"
 REMOTE_DUOKAN_FONTS="/storage/emulated/0/DuoKan/Base/Fonts"
+REMOTE_ALREADER_FONTS="/storage/emulated/0/AlReader/fonts"
 ADB=(adb)
 
 if [[ -n "${ANDROID_SERIAL:-}" ]]; then
@@ -33,7 +34,8 @@ adb_push() {
 "${ADB[@]}" shell mkdir -p \
     "$REMOTE_KOREADER_FONTS" \
     "$REMOTE_SYSTEM_FONTS" \
-    "$REMOTE_DUOKAN_FONTS" </dev/null
+    "$REMOTE_DUOKAN_FONTS" \
+    "$REMOTE_ALREADER_FONTS" </dev/null
 
 for font in "$FONTS_DIR"/*.ttf "$FONTS_DIR"/*.otf; do
     [[ -f "$font" ]] || continue
@@ -42,6 +44,7 @@ for font in "$FONTS_DIR"/*.ttf "$FONTS_DIR"/*.otf; do
     adb_push "$font" "$REMOTE_KOREADER_FONTS/$font_name"
     adb_push "$font" "$REMOTE_SYSTEM_FONTS/$font_name"
     adb_push "$font" "$REMOTE_DUOKAN_FONTS/$font_name"
+    adb_push "$font" "$REMOTE_ALREADER_FONTS/$font_name"
 done
 
-printf 'Fonts installed successfully to KOReader, system Fonts, and DuoKan.\n'
+printf 'Fonts installed successfully to KOReader, system Fonts, DuoKan, and AlReader.\n'

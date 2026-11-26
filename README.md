@@ -63,7 +63,7 @@ The device locale is set to Traditional Chinese (`zh_TW`). After reboot, the And
 
 - `opencc.koplugin/` — KOReader menu plugin, markup-aware EPUB conversion, native OpenCC executable, dictionaries, and license texts.
 - `fonts/` — Iansui (芫荽) font (`Iansui-Regular.ttf`) and SIL Open Font License 1.1 terms.
-- `install-fonts.sh` — installs fonts to KOReader, system Fonts, and DuoKan over ADB.
+- `install-fonts.sh` — installs fonts to KOReader, system Fonts, DuoKan, and AlReader over ADB.
 - `z9-opencc.py` — Mac/ADB conversion fallback.
 - `SetLauncherDefaultBinderTest.java` and `z9-home-default.jar` — Android 4.4 UiAutomator helper for setting the HOME preference.
 - `patch-services-launcher.py` — rebuilds the device-specific Launcher framework change from an exact-hash original JAR.
