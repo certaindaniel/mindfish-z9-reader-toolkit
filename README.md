@@ -31,6 +31,18 @@ If more than one Android device is connected, select the Z9 explicitly:
 ANDROID_SERIAL=YOUR_DEVICE_SERIAL bash install-opencc-koplugin.sh
 ```
 
+Install the Iansui (芫荽) font to KOReader and system reader font directories over ADB:
+
+```sh
+bash install-fonts.sh
+```
+
+If more than one Android device is connected, select the serial explicitly:
+
+```sh
+ANDROID_SERIAL=YOUR_DEVICE_SERIAL bash install-fonts.sh
+```
+
 Open an EPUB or TXT book and use the book menu: **簡體轉台灣繁體** → **將目前的 EPUB／TXT 轉成台灣繁體副本**. The converted `.zh-TW` copy is saved beside the source; the source and any existing copy are preserved.
 
 For the Mac-side converter, see [`README-OpenCC.md`](README-OpenCC.md). For launcher behavior and per-device checks, start with [`docs/Current-Changes.md`](docs/Current-Changes.md) and [`docs/Launcher-Runbook.md`](docs/Launcher-Runbook.md).
@@ -50,6 +62,8 @@ The device locale is set to Traditional Chinese (`zh_TW`). After reboot, the And
 ## Package map
 
 - `opencc.koplugin/` — KOReader menu plugin, markup-aware EPUB conversion, native OpenCC executable, dictionaries, and license texts.
+- `fonts/` — Iansui (芫荽) font (`Iansui-Regular.ttf`) and SIL Open Font License 1.1 terms.
+- `install-fonts.sh` — installs fonts to KOReader, system Fonts, and DuoKan over ADB.
 - `z9-opencc.py` — Mac/ADB conversion fallback.
 - `SetLauncherDefaultBinderTest.java` and `z9-home-default.jar` — Android 4.4 UiAutomator helper for setting the HOME preference.
 - `patch-services-launcher.py` — rebuilds the device-specific Launcher framework change from an exact-hash original JAR.
